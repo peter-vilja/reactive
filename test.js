@@ -1,3 +1,4 @@
+
 /*var e1 = EventStream.of(1);
 e1.fork(function (e) {console.log(e);});*/
 
@@ -40,3 +41,6 @@ var both = stream.concat(stream2);
 both.fork(function (e) {
   console.log(e);
 });
+
+var behavior = Behavior(R.add(1));
+console.log(behavior.ap(Behavior(2)));
