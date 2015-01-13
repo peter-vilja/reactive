@@ -36,8 +36,10 @@ var newStream = EventStream.of(bothClicked).ap(stream).ap(stream2);*/
 
 // u.ap(a.of(y)) is equivalent to a.of(function(f) { return f(y); }).ap(u) (interchange)
 //stream.ap(EventStream.of(3));
+var empty = EventStream.empty();
 
-var both = stream.concat(stream2);
+var both = empty.concat(stream);
+
 both.fork(function (e) {
   console.log(e);
 });
