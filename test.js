@@ -40,7 +40,7 @@ var empty = EventStream.empty();
 
 var both = empty.concat(stream);
 
-both.fork(function (e) {
+var unsubscribe = both.fork(function (e) {
   console.log(e);
 });
 
