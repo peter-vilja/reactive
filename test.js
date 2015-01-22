@@ -1,6 +1,6 @@
 
 /*var e1 = EventStream.of(1);
-e1.fork(function (e) {console.log(e);});*/
+e1.subscribe(function (e) {console.log(e);});*/
 
 var stream = EventStream.fromEvent('click', document.querySelector('.btn1'));
 
@@ -8,7 +8,7 @@ var stream = EventStream.fromEvent('click', document.querySelector('.btn1'));
   return 2;
 }).filter(function (e) {
   return e >= 2;
-}).fork(function (e) {
+}).subscribe(function (e) {
   console.log(e);
 });*/
 
@@ -16,7 +16,7 @@ var stream2 = EventStream.fromEvent('click', document.querySelector('.btn2'));
 
 /*var aORb = stream.chain(function () {return stream2;});
 
-aORb.fork(function (b) {
+aORb.subscribe(function (b) {
   console.log("asd", b);
 });*/
 
@@ -40,7 +40,7 @@ var empty = EventStream.empty();
 
 var both = empty.concat(stream);
 
-var unsubscribe = both.fork(function (e) {
+var unsubscribe = both.subscribe(function (e) {
   console.log(e);
 });
 
