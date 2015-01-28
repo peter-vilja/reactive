@@ -44,5 +44,17 @@ var unsubscribe = both.subscribe(function (e) {
   console.log(e);
 });
 
+var I = function (a) {
+  return function () {
+    return a;
+  };
+};
+
+stream.map(I(1)).merge(stream2.map(I(-1))).scan(function (a, b) {
+  return a + b;
+}).subscribe(function (a) {
+  console.log(a);
+});
+
 var behavior = Behavior(R.add(1));
 console.log(behavior.ap(Behavior(2)));
