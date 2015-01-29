@@ -56,5 +56,65 @@ stream.map(I(1)).merge(stream2.map(I(-1))).scan(function (a, b) {
   console.log(a);
 });
 
-var behavior = Behavior(R.add(1));
-console.log(behavior.ap(Behavior(2)));
+
+// -- Behavior ---------------------
+
+//var behavior = Behavior(R.add(1));
+//console.log(behavior.ap(Behavior(2)));
+
+
+// var b3 = Behavior(2);
+// var b4 = b3.map(x => x + 1);
+// var filtered = b4.filter(x => x % 2 === 0);
+// filtered.fork(log);
+// b3.next(9);
+
+// var bf = Behavior(x => y => y + x);
+// var b = bf.ap(Behavior(2)).ap(Behavior(3));
+// b.fork(log);
+
+
+// var behavior = Behavior(R.add(1));
+// console.log(behavior.ap(Behavior(2)));
+// console.log(behavior.ap(Maybe.Just(7)));
+//
+// var b3 = Behavior(3);
+// var b4 = Behavior(4);
+// var log = R.curry((a, b) => console.log(a, b));
+//
+// liftA2(log, b3, b4)
+// console.log(liftA2(R.add, b3, b4));
+
+// console.log('-- Applictive algebras ------------------');
+//
+// var id = (a) => a;
+// console.log('a.of(function(a) { return a; }).ap(v) is equivalent to v (identity)');
+// console.log(Behavior.of(id).ap(Behavior(5)), Behavior(5));
+//
+// console.log('a.of(f).ap(a.of(x)) is equivalent to a.of(f(x)) (homomorphism)');
+// console.log(Behavior.of(id).ap(Behavior.of(3)), Behavior.of(id(3)));
+//
+// var u = Behavior.of(v => v + 1);
+// var y = Behavior.of(3);
+// console.log('u.ap(a.of(y)) is equivalent to a.of(function(f) { return f(y); }).ap(u) (interchange)');
+// console.log(u.ap(y), Behavior.of(f => f(3)).ap(u));
+//
+// console.log('--------------------');
+//
+// console.log('-- Chain algebras -----------------------');
+//
+// var addOne = value => Behavior.of(value + 1);
+// var addTwo = value => Behavior.of(value + 2);
+// console.log('m.chain(f).chain(g) is equivalent to m.chain(function(x) { return f(x).chain(g); }) (associativity)')
+// console.log(Behavior.of(3).chain(addOne).chain(addTwo), Behavior(3).chain(x => addOne(x).chain(addTwo)));
+//
+// console.log('--------------------');
+//
+// console.log('-- Monad algebras -----------------------');
+//
+// console.log('m.of(a).chain(f) is equivalent to f(a) (left identity)');
+// console.log(Behavior.of(2).chain(id), id(2));
+// console.log('m.chain(m.of) is equivalent to m (right identity)');
+// console.log(Behavior.of(2).chain(Behavior.of), Behavior.of(2));
+//
+// console.log('--------------------');
