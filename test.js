@@ -36,7 +36,7 @@ var newStream = EventStream.of(bothClicked).ap(stream).ap(stream2);*/
 
 // u.ap(a.of(y)) is equivalent to a.of(function(f) { return f(y); }).ap(u) (interchange)
 //stream.ap(EventStream.of(3));
-var empty = EventStream.empty();
+/*var empty = EventStream.empty();
 
 var both = empty.concat(stream);
 
@@ -53,6 +53,15 @@ var I = function (a) {
 stream.map(I(1)).merge(stream2.map(I(-1))).scan(function (a, b) {
   return a + b;
 }).subscribe(function (a) {
+  console.log(a);
+});
+*/
+
+var asd = stream2.debounce(1000).scan(function (a, _) {
+  return !a;
+}, true);
+
+asd.subscribe(function (a) {
   console.log(a);
 });
 
