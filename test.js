@@ -65,6 +65,16 @@ asd.subscribe(function (a) {
   console.log(a);
 });
 
+var b = Behavior.of(1)
+var c = b.bufferWithCount(2);
+c.subscribe(function (a) {
+  console.log(a);
+});
+
+b.next(2);
+b.next(3);
+b.next(4);
+
 
 // -- Behavior ---------------------
 
