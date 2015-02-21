@@ -57,8 +57,9 @@ stream.map(I(1)).merge(stream2.map(I(-1))).scan(function (a, b) {
 });
 */
 
-stream.throttle(5000).subscribe(function (e) {console.log(e);});
+//stream.throttle(5000).subscribe(function (e) {console.log(e);});
 
+/*
 var asd = stream2.debounce(1000).scan(function (a, _) {
   return !a;
 }, true);
@@ -75,8 +76,26 @@ c.subscribe(function (a) {
 
 b.next(2);
 b.next(3);
-b.next(4);
+b.next(4);*/
 
+var add = function (a) {
+  return function (b) {
+    return a+b;
+  }
+};
+var newCount = stream.scan(function (a, b) {
+                        return {newCount: a.newCount + 1}
+                        }, {newCount: 0});
+
+var deletedCount = stream2.scan(function (a, b) {
+                            return {deletedCount: a.deletedCount + 1}
+                            }, {deletedCount: 0});
+
+
+var a = Behavior.of(function(a) {return function (b) {return [a.newCount, b.deletedCount];}}).ap(newCount).ap(deletedCount);
+a.subscribe(function(a) {
+  console.log(a);
+});
 
 // -- Behavior ---------------------
 
