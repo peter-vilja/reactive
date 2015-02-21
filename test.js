@@ -57,6 +57,8 @@ stream.map(I(1)).merge(stream2.map(I(-1))).scan(function (a, b) {
 });
 */
 
+stream.throttle(5000).subscribe(function (e) {console.log(e);});
+
 var asd = stream2.debounce(1000).scan(function (a, _) {
   return !a;
 }, true);
