@@ -16,5 +16,9 @@
   "engines": ">=0.10",
   "main": "lib/reactive.js",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "data.maybe": "^1.2.0",
+    "ramda": "^0.10.0",
+    "should": "^5.0.1"
+  }
 }
