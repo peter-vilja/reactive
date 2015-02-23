@@ -3,7 +3,6 @@ var should = require('should');
 var R = require('ramda');
 var Maybe = require('data.maybe');
 var reactive = require('../lib/reactive');
-var EventStream = reactive.EventStrem;
 var Behavior = reactive.Behavior;
 
 var value = function (behavior) { return behavior.observable.event; };
@@ -11,67 +10,61 @@ var bEqual = R.curry(function (a, b) { value(a).should.equal(value(b)); });
 
 describe('Behavior should follow fantasy-land\'s laws', function () {
   describe('Applictive algebras', function () {
-    it('a.of(function(a) { return a; }).ap(v) is equivalent to v (identity)', function (done) {
+    it('a.of(function(a) { return a; }).ap(v) is equivalent to v (identity)', function () {
       var v = Behavior(5);
       var x = Behavior.of(R.identity).ap(v);
       bEqual(x, v);
-      done();
     });
 
-    it('a.of(f).ap(a.of(x)) is equivalent to a.of(f(x)) (homomorphism)', function (done) {
+    it('a.of(f).ap(a.of(x)) is equivalent to a.of(f(x)) (homomorphism)', function () {
       var f = R.identity;
       var x = 3;
       var a = Behavior.of(f).ap(Behavior.of(x));
       var b = Behavior.of(f(x));
       bEqual(a, b);
-      done();
     });
 
-    it('u.ap(a.of(y)) is equivalent to a.of(function(f) { return f(y); }).ap(u) (interchange)', function (done) {
+    it('u.ap(a.of(y)) is equivalent to a.of(function(f) { return f(y); }).ap(u) (interchange)', function () {
       var u = Behavior.of(function (v) { return v + 1; });
       var y = 3;
       var a = u.ap(Behavior.of(y));
       var b = Behavior.of(function (f) { return f(y); }).ap(u);
       bEqual(a, b);
-      done();
     });
   });
 
   describe('Chain algebras', function () {
-    it('m.chain(f).chain(g) is equivalent to m.chain(function(x) { return f(x).chain(g); }) (associativity)', function (done) {
+    it('m.chain(f).chain(g) is equivalent to m.chain(function(x) { return f(x).chain(g); }) (associativity)', function () {
       var m = Behavior(3);
       var f = function (value) { return Behavior.of(value + 1); };
       var g = function (value) { return Behavior.of(value + 2); };
       var a = m.chain(f).chain(g);
       var b = m.chain(function (x) { return f(x).chain(g); });
       bEqual(a, b);
-      done();
     });
   });
 
   describe('Monad algebras', function () {
-    it('m.of(a).chain(f) is equivalent to f(a) (left identity)', function (done) {
+    it('m.of(a).chain(f) is equivalent to f(a) (left identity)', function () {
       var m = Behavior;
       var a = 2;
       var f = function (a) { return Behavior.of(a); };
       var x = m.of(a).chain(f);
       var y = f(a);
       bEqual(x, y);
-      done();
     });
 
-    it('m.chain(m.of) is equivalent to m (right identity)', function (done) {
+    it('m.chain(m.of) is equivalent to m (right identity)', function () {
       var m = Behavior();
       var a = m.chain(m.of);
       var b = m;
       (value(a) === value(b)).should.be.true;
-      done();
     });
   });
 });
 
 describe('Behavior functionality', function () {
-  it('should define ap method', function (done) {
+  it('should define ap method', function () {
     var b = Behavior(R.add(1));
     var b2 = b.ap(Behavior(2));
     value(b2).should.equal(3);
@@ -84,7 +77,6 @@ describe('Behavior functionality', function () {
                     .ap(Behavior(3));
     var y = Behavior.of(5);
     bEqual(x, y);
-    done();
   });
 
   it('should define filter method', function (done) {
