@@ -1,6 +1,6 @@
 # Reactive
 
-A small monadic functional reactive library.
+A small monadic functional reactive library, which implements [fantasy-land's specification.](https://github.com/fantasyland/fantasy-land)
 
 Exposes two Types
   - EventStream
